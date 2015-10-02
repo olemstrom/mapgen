@@ -15,7 +15,7 @@ class Map {
 	generateRooms(roomCount) {
 		for(let generatedRooms = 0; generatedRooms < roomCount; generatedRooms++) {
 			let room = Roomgen.room(50, 50);
-			room.position(generatedRooms*50, generatedRooms*50);
+			room.randomPosition(this.width, this.height);
 			this.addRoom(room);
 		}
 
