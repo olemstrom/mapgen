@@ -4,6 +4,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     "watch": {
       files: ["**/*", "!build/**"],
+      options: {
+        interval: 5007
+      },
       tasks: ["browserify"]
     },
     "browserify": {
