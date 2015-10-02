@@ -29,12 +29,46 @@ class Map {
 			if(closestUnconnected) room.connect(closestUnconnected);
 		});
 
-		console.log("Connected", this.rooms)
+		this.connectRoomsets(this.getRoomsets());
 	}
 
-	addConnection(room1, room2) {
-		let connection = new Connection(room1, room2);
-		connections.push(connection);
+	connectRoomsets(roomsets) {
+		roomsets.forEach(function(roomset, roomsetIndex){
+			if(roomsetIndex == roomsets.length - 1) return; // last roomset
+
+			let roomIndex1 = Math.floor(Math.random()*roomset.length),
+				roomIndex2 = Math.floor(Math.random()*roomset.length),
+				room1 = roomset[roomIndex1],
+				room2 = roomsets[roomsetIndex + 1][roomIndex2];
+
+			room1.connect(room2);
+		});
+	}
+
+	getRoomsets() {
+		let roomsets = [],
+			allFound = [];
+		let rooms = this.rooms;
+		while(rooms.length > 0) {
+			findRooms(rooms[0]);
+			// remove all found rooms from the total roomlist
+			rooms = rooms.filter((room) => allFound.indexOf(room) === -1);
+			roomsets.push(allFound);
+			allFound = [];
+		}
+		
+
+		function findRooms(room) {
+			room.connections.forEach(function(connection){
+				if(allFound.indexOf(connection) === -1) {
+					allFound.push(connection);
+					findRooms(connection);
+				}
+			});
+		}
+
+		console.log("Roomset", roomsets);
+		return roomsets;
 	}
 
 	draw() {
