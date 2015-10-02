@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/main.js"],"names":[],"mappings":";;;;yBAAyB,YAAY;;IAAzB,OAAO;;AACnB,OAAO,CAAC,IAAI,EAAE,CAAC","file":"app.js","sourcesContent":["import * as Roomgen from \"roomgen.js\";\r\nRoomgen.room();"]}
